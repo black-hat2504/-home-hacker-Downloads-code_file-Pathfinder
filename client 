@@ -1,0 +1,13 @@
+import java.net.*;
+class UDPClient {
+  public static void main(String[] a)throws Exception{
+    DatagramSocket c=new DatagramSocket();
+    InetAddress i=InetAddress.getByName("127.0.0.1"); // replace with server IP
+    byte[] m="Hello Server".getBytes(),r=new byte[100];
+    c.send(new DatagramPacket(m,m.length,i,9876));
+    DatagramPacket p=new DatagramPacket(r,r.length);
+    c.receive(p);
+    System.out.println("Server: "+new String(p.getData()).trim());
+    c.close();
+  }
+}
